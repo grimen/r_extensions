@@ -23,10 +23,6 @@ module RExtensions
           session[:last_action] = controller.action_name rescue nil
         end
         
-        def last_page_url
-          session[:last_page]
-        end
-        
       end
       
     end

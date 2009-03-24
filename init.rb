@@ -6,10 +6,11 @@ ActionController::Base.send :include, RExtensions::ActionController::Core
 ActionController::Base.send :include, RExtensions::ActionController::Resource
 ActionController::Base.send :include, RExtensions::ActionController::Security
 
-ActionView::Base.send :include, RExtensions::ActionView::CoreHelper
-ActionView::Base.send :include, RExtensions::ActionView::FormHelper
-ActionView::Base.send :include, RExtensions::ActionView::NavigationHelper
-ActionView::Base.send :include, RExtensions::ActionView::ResourceHelper
-ActionView::Base.send :include, RExtensions::ActionView::TagHelper
+ActionView::Base.send :include, RExtensions::ActionView::Helpers::CoreHelper
+ActionView::Base.send :include, RExtensions::ActionView::Helpers::FormHelper
+ActionView::Base.send :include, RExtensions::ActionView::Helpers::NavigationHelper
+ActionView::Base.send :include, RExtensions::ActionView::Helpers::ResourceHelper
+ActionView::Base.send :include, RExtensions::ActionView::Helpers::TagHelper
+ActionView::Base.send :include, RExtensions::ActionView::Helpers::UrlHelper
 
 #ActiveRecord::Base.send :include, RExtensions::ActionRecord::Validations
