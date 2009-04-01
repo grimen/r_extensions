@@ -44,6 +44,7 @@ module RExtensions
             content_tag(:span, h(default_value.to_s), :class => 'no_value')
           end
         end
+        alias_method :v, :value
         
         # TODO: make attribute accept an array instead of only a symbol, [..., :owner, :first_name]
         def value_new(object, attribute, default_value = '', options = {})
@@ -90,6 +91,11 @@ module RExtensions
             end
             text content[:pagination_bottom] if options[:pagination].include?(:bottom)
           end
+        end
+        
+        def render_item(object, options = {})
+          options[:partial] ||= 'item'
+          render :partial => options[:partial].to_s, :object => object
         end
         
       end

@@ -2,15 +2,27 @@ Dir[File.expand_path(File.join(File.dirname(__FILE__), 'lib', '**', '*.rb'))].un
   require file
 end
 
-ActionController::Base.send :include, RExtensions::ActionController::Core
-ActionController::Base.send :include, RExtensions::ActionController::Resource
-ActionController::Base.send :include, RExtensions::ActionController::Security
+ActionController::Base.class_eval do
+  include RExtensions::ActionController::Base
+  include RExtensions::ActionController::Resource
+  include RExtensions::ActionController::Security
+end
 
-ActionView::Base.send :include, RExtensions::ActionView::Helpers::CoreHelper
-ActionView::Base.send :include, RExtensions::ActionView::Helpers::FormHelper
-ActionView::Base.send :include, RExtensions::ActionView::Helpers::NavigationHelper
-ActionView::Base.send :include, RExtensions::ActionView::Helpers::ResourceHelper
-ActionView::Base.send :include, RExtensions::ActionView::Helpers::TagHelper
-ActionView::Base.send :include, RExtensions::ActionView::Helpers::UrlHelper
+# ActionController::Filters::AroundFilter.class_eval do
+#   include RExtensions::ActionController::Filters::AroundFilter
+# end
 
-#ActiveRecord::Base.send :include, RExtensions::ActionRecord::Validations
+ActionView::Base.class_eval do
+  include RExtensions::ActionView::Helpers::BaseHelper
+  include RExtensions::ActionView::Helpers::FormHelper
+  include RExtensions::ActionView::Helpers::NavigationHelper
+  include RExtensions::ActionView::Helpers::ResourceHelper
+  include RExtensions::ActionView::Helpers::TagHelper
+  include RExtensions::ActionView::Helpers::TranslationHelper
+  include RExtensions::ActionView::Helpers::UrlHelper
+end
+
+ActiveRecord::Base.class_eval do
+  include RExtensions::ActiveRecord::Base
+  include RExtensions::ActiveRecord::Validations
+end

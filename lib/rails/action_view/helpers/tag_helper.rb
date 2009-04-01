@@ -5,6 +5,7 @@ module RExtensions
     module Helpers
       module TagHelper
         
+        # Textilize the block content using RedCloth, i.e. Textile => HTML
         def textilize(options = {}, &block)
           options[:strip] ||= true
           content = block_content(&block)

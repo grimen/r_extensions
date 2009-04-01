@@ -1,0 +1,35 @@
+h1. DSLs
+
+h2. Now
+
+@edit = Post.find(params[:id]) do |p|
+  p.phone = "0702167225"
+  p.name = "Jonas"
+end
+
+h2. Idea
+
+update_or_create @post => params[:post] do
+  name "Jonas"
+  description "hej"
+end
+
+update_or_create :post => params[:id] do
+  phone "0702167225"
+  name "Jonas"
+end.save
+
+update_or_create :post => @post do
+  phone "0702167225"
+  name "Jonas"
+end.save
+
+update_or_create @post do
+  phone "0702167225"
+  name "Jonas"
+end.save
+
+update_or_create @post, :with => params[:post]
+update_or_create @post => params[:post]
+update_or_create @post, params[:post]
+

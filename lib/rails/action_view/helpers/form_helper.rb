@@ -11,7 +11,8 @@ module RExtensions
           render_html do
             li do
               text commit_button
-              script "$('form').keypress(function (e) { if (e.which == 13) { $('form').submit(); }});"
+              
+              script("$('form').keypress(function (e) { if (e.which == 13) { $('form').submit(); }});") if options[:trigger_with_enter]
             end
           end
         end
@@ -21,7 +22,7 @@ module RExtensions
           
           render_html do
             li.or_action do
-              span ' or '
+              span " #{I18n.t('support.words.or')} "
               text content
             end
           end
@@ -49,6 +50,23 @@ module RExtensions
               end
             end
           end
+        end
+        
+        def render_form(*args)
+          options, args = extract_options_with_defaults
+          
+          options[:partial] ||= 'form'
+          partial = options.delete(:partial)
+          
+          if options.present?
+            form_key, form_object = options.shift
+          elsif args
+            form_key, form_object = :form, args.first
+          else
+            raise "Form object not specified"
+          end
+          
+          render :partial => partial, :locals => {form_key.to_sym => form_object}
         end
         
       end
