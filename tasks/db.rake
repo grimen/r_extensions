@@ -6,7 +6,7 @@ namespace :db do
     
     GLOBAL_FIXTURES_PATH = File.join(Rails.root, 'db', 'fixtures')
     
-    Dir.glob(File.join(GLOBAL_FIXTURES_PATH, '*.yml')).each do |file|
+    Dir.glob(File.join(GLOBAL_FIXTURES_PATH, '**', '*.yml')).each do |file|
       puts "Loading fixture: #{File.basename(file)}\n"
       Fixtures.create_fixtures('db/fixtures', File.basename(file, '.*'))
     end
