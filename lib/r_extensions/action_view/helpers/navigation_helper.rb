@@ -93,8 +93,8 @@ module RExtensions
         def button(text, url, options = {})
           options[:class] = [
               'action',
-              options[:icon],
-              ('current' if options[:current]),
+              options.delete(:icon),
+              ('current' if options.delete(:current)),
               options[:class]
             ].compact.join(' ')
           
@@ -102,12 +102,12 @@ module RExtensions
             span.left ' '
             span.middle do
               span.text text
-              small.extra(options[:extra]) unless options[:extra].blank?
+              small.extra(options.delete(:extra)) unless options[:extra].blank?
             end
             span.right ' '
           end
           
-          link_to(html, url, options.slice(:id, :method, :class, :title, :onclick))
+          link_to(html, url, options)
         end
         
         def filter_buttons(options = {}, &block)

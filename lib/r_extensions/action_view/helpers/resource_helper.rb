@@ -27,7 +27,7 @@ module RExtensions
           render_html do
             p.collection_info do
               text "#{options[:prefix]} "
-              strong.collection_size collection.size rescue 0
+              strong.collection_size collection.compact.size rescue 0
               text " #{options[:as].to_s.pluralize}."
               text "#{options[:suffix]}"
             end
@@ -63,6 +63,8 @@ module RExtensions
         end
         
         def render_items(collection, options = {})
+          collection.compact!
+          
           if collection.blank?
             return render_html do
               p.empty do

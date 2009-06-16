@@ -5,13 +5,13 @@ module RExtensions
     end
   end
   
+  def options
+    @options ||= {}
+    @options[:default_per_page] ||= 20
+    @options
+  end
+  
   module ClassMethods
-    
-    def options
-      @options ||= {}
-      @options[:default_per_page] ||= 20
-      @options
-    end
     
     def extract_options_with_defaults!(args, defaults = {})
       options = args.extract_options!
