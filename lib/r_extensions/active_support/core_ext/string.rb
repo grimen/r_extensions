@@ -3,7 +3,7 @@ require 'RedCloth'
 class String
   
   def t(scope = nil)
-    I18n.t(self, :scope => scope).textilize(:strip => true)
+    ::I18n.t(self, :scope => scope).textilize(:strip => true)
   end
   
   def to_id
@@ -20,6 +20,7 @@ class String
     
     if options[:strip_paragraphs] || options[:strip]
       unless result.blank?
+        result.strip!
         result = result[3..-1]
         result = result[0..-5]
       else
@@ -67,7 +68,7 @@ class String
   def succeed!; self.replace self.succeed; end
   
   def ago
-    "%s %s" % [self, I18n.t('datetime.distance_in_words.ago', :default => 'ago')]
+    "%s %s" % [self, ::I18n.t('datetime.distance_in_words.ago', :default => 'ago')]
   end
   
 end

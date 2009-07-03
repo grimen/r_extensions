@@ -12,7 +12,11 @@ module RExtensions
             li do
               text commit_button
               
-              script("$('form').keypress(function (e) { if (e.which == 13) { $('form').submit(); }});") if options[:trigger_with_enter]
+              if options[:trigger_with_enter]
+                script :type => 'text/javascript' do
+                  "$('form').keypress(function (e) { if (e.which == 13) { $('form').submit(); }});"
+                end
+              end
             end
           end
         end
@@ -31,22 +35,27 @@ module RExtensions
         def notes(options = {}, &block)
           content = capture_content(&block)
           
+          print "*** notes: #{content.inspect}"
+          
           render_html do
             fieldset.notes do
               ol do
-                content
+                text content
               end
             end
           end
         end
         
         def note(options = {}, &block)
-          content = textilize_without_paragraphs(capture_content(&block))
+          content = capture_content(&block)
+          content = content.textilize(:strip => true) rescue content
+          
+          print "*** note: #{content.inspect}"
           
           render_html do
             li.note do
               div :class => options[:class] do
-                content
+                text content
               end
             end
           end

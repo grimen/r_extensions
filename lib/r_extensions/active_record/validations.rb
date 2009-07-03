@@ -16,7 +16,7 @@ module RExtensions
           email_field_regex ||= /\A#{email_name_regex}@#{domain_head_regex}#{domain_tld_regex}\z/i
           
           validates_length_of field, :within => 6..100
-          validates_format_of field, :with => email_field_regex, :message => I18n.t('authlogic.error_messages.email_invalid')
+          validates_format_of field, :with => email_field_regex, :message => ::I18n.t('authlogic.error_messages.email_invalid')
           validates_uniqueness_of field, :if => "#{field}_changed?".to_sym
         end
         

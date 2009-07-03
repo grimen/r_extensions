@@ -18,6 +18,7 @@ ActionView::Base.class_eval do
   include RExtensions::ActionView::Helpers::NavigationHelper
   include RExtensions::ActionView::Helpers::ResourceHelper
   include RExtensions::ActionView::Helpers::TagHelper
+  include RExtensions::ActionView::Helpers::TextHelper
   include RExtensions::ActionView::Helpers::TranslationHelper
   include RExtensions::ActionView::Helpers::UrlHelper
 end
