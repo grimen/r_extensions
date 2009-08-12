@@ -21,14 +21,15 @@ module RExtensions
         
         def collection_info(collection, options = {})
           options[:as] ||= :items
-          options[:prefix] = 'Found'
+          options[:prefix] = ''
           options[:suffix] = nil
           
           render_html do
             p.collection_info do
               text "#{options[:prefix]} "
-              strong.collection_size collection.compact.size rescue 0
-              text " #{options[:as].to_s.pluralize}."
+              # strong.collection_size collection.compact.size rescue 0
+              text I18n.t("models.#{options[:as].tableize.singularize}", :count => collection.compact.size)
+              # text " #{options[:as].to_s.pluralize}."
               text "#{options[:suffix]}"
             end
           end
