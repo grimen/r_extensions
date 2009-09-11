@@ -69,17 +69,17 @@ module RExtensions
           end
         end
         
-        def permalink
-          if self.name.present?
-            "#{self.id}-#{self.name.parameterize}"
-          else
-            "#{self.id}"
-          end
-        end
-        
-        def to_param
-          self.permalink
-        end
+        # def permalink
+        #           if self.name.present?
+        #             "#{self.id}-#{self.name.parameterize}"
+        #           else
+        #             "#{self.id}"
+        #           end
+        #         end
+        #         
+        #         def to_param
+        #           self.permalink
+        #         end
         
       end
       
